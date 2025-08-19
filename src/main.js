@@ -5,7 +5,7 @@ import { loadFiles } from './filestore.js';
 import { appendFile } from 'fs/promises';
 import { z } from 'zod';
 
-
+console.log("Reading Files...");
 let files = loadFiles('./src/');
 
 const vulernabilityAgent = new Agent({
@@ -13,14 +13,14 @@ const vulernabilityAgent = new Agent({
     instructions: 'You are a helpful software application security analyst assistant format return data with this javascript JSON structure [{id, title, description }] ',
     outputType: z.object({
         content: z.string()
-  })
-   
+    })
+
 });
 
 const owasp = await run(
     vulernabilityAgent,
     'Return all published application security vunerabilities',
-    
+
 
 );
 

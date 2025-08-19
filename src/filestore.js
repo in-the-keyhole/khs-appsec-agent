@@ -12,7 +12,6 @@ function readFilesInDirectory(directoryPath, fileMap) {
             readFilesInDirectory(filePath, fileMap);
         } else {
             const fileContent = fs.readFileSync(filePath, 'utf8');
-            console.log("Read file :"+file);
             fileMap.set(file, fileContent);
         }
     });
@@ -20,7 +19,7 @@ function readFilesInDirectory(directoryPath, fileMap) {
 
 
 const loadFiles = (directoryPath) => {
-   
+
     const fileMap = new Map();
 
     readFilesInDirectory(directoryPath, fileMap);
@@ -29,6 +28,6 @@ const loadFiles = (directoryPath) => {
 
 }
 
-export {loadFiles};
+export { loadFiles };
 
 
