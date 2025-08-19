@@ -44,7 +44,7 @@ const write =
         // Format the date as yyyy-mm-dd
         const formattedDate = currentDate.toISOString().slice(0, 10);
 
-        const fileName = `./owasp_report_${formattedDate}.md`;
+        const fileName = `./reports/owasp_report_${formattedDate}.md`;
 
         try {
             if (data) {
