@@ -30,9 +30,14 @@ let json = owasp.finalOutput.content.replace(/\n/g, '');
 let vunerabilities = JSON.parse(json);
 
 
-const instructionAgent = new Agent({
+const appsecAgent = new Agent({
     name: 'Software Developer Assistant',
     instructions: 'You are a helpful software application security analyst assistant find vunerabilities in code',
+      outputType: z.object({
+              content: z.string(),
+              hasVulnerabilities: z.boolean()
+            })
+
 });
 
 const write =
@@ -67,14 +72,19 @@ vunerabilities.forEach((value) => {
 
 
         const instructions = await run(
-            instructionAgent,
+            appsecAgent,
             'Find ' + value.title + ' vunerabilites in this source code file ' + file + ': ' + contents,
         );
 
         //   console.log(instructions.finalOutput);
-        output += instructions.finalOutput;
+        output = instructions.finalOutput.content;
         // console.log(output);
         write(output);
+
+        if (instructions.finalOutput.hasVulnerabilities) {
+         console.log("Vunerabilities found in "+file);   
+        }
+
 
 
     });
